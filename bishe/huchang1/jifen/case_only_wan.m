@@ -1,0 +1,21 @@
+clc;clear;
+ei=1;
+m=1;
+moduan=pi/4/4;
+fin=[0:0.01:moduan];
+fin_rr=moduan-fin;
+fin_r=fliplr(fin);
+xa=ei/m*(sin(moduan)-sin(0));
+ya=ei/m*(cos(0)-cos(moduan));
+x=ei/m*(sin(moduan)-sin(fin_r));
+y=ei/m*(cos(fin_r)-cos(moduan));
+% xa=ei/m*(sin(moduan)-sin(0));
+% ya=-ei/m*(cos(moduan)-cos(0));
+% x=ei/m*(sin(fin)-sin(0));
+% y=-ei/m*(cos(fin)-cos(0));
+theta=fin_rr+pi;
+% x_pie=x.*cos(theta)+y.*sin(theta)+xa;
+% y_pie=y.*cos(theta)-x.*sin(theta)+ya;
+x_pie=x.*cos(theta)-y.*sin(theta)+xa;
+y_pie=y.*cos(theta)+x.*sin(theta)+ya;
+plot(y_pie,x_pie)

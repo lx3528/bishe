@@ -1,0 +1,61 @@
+% The starting point.
+load gene.mat gene;                    % to load gene
+[m,n]=size(gene);
+load A0.mat A0;                        % to load b0
+load A1.mat A1;
+load A2.mat A2;
+load A3.mat A3;
+load A4.mat A4;
+load A5.mat A5;
+load A6.mat A6;
+load A7.mat A7;
+load A8.mat A8;
+load A9.mat A9;
+load A10.mat A10;
+load A11.mat A11;
+load A12.mat A12;
+C(:,1)=A0*gene(:,1);
+C(:,2)=A1*gene(:,2);
+C(:,3)=A2*gene(:,3);
+C(:,4)=A3*gene(:,4);
+C(:,5)=A4*gene(:,5);
+C(:,6)=A5*gene(:,6);
+C(:,7)=A5*gene(:,7);
+C(:,8)=A6*gene(:,8);
+C(:,9)=A6*gene(:,9);
+C(:,10)=A7*gene(:,10);
+C(:,11)=A7*gene(:,11);
+C(:,12)=A8*gene(:,12);
+C(:,13)=A8*gene(:,13);
+C(:,14)=A9*gene(:,14);
+C(:,15)=A10*gene(:,15);
+C(:,16)=A11*gene(:,16);
+C(:,17)=A12*gene(:,17);
+I(:,1)=(gene(:,1)+gene(:,2)+gene(:,3)+gene(:,4))/4;
+I(:,2)=(gene(:,2)+gene(:,3)+gene(:,4)+gene(:,5))/4;
+I(:,3)=(gene(:,3)+gene(:,4)+gene(:,5)+gene(:,6))/4;
+I(:,4)=(gene(:,4)+gene(:,5)+gene(:,6)+gene(:,7))/4;
+I(:,5)=(gene(:,5)+gene(:,6)+gene(:,7)+gene(:,8))/4;
+I(:,6)=(gene(:,6)+gene(:,7)+gene(:,8)+gene(:,9))/4;
+I(:,7)=(gene(:,6)+gene(:,7)+gene(:,8)+gene(:,9))/4;
+I(:,8)=(gene(:,6)+gene(:,7)+gene(:,8)+gene(:,9))/4;
+I(:,9)=(gene(:,7)+gene(:,8)+gene(:,9)+gene(:,10))/4;
+I(:,10)=(gene(:,8)+gene(:,9)+gene(:,10)+gene(:,11))/4;
+I(:,11)=(gene(:,8)+gene(:,9)+gene(:,10)+gene(:,11))/4;
+I(:,12)=(gene(:,9)+gene(:,10)+gene(:,11)+gene(:,12))/4;
+I(:,13)=(gene(:,10)+gene(:,11)+gene(:,12)+gene(:,13))/4;
+I(:,14)=(gene(:,11)+gene(:,12)+gene(:,13)+gene(:,14))/4;
+I(:,15)=(gene(:,12)+gene(:,13)+gene(:,14)+gene(:,15))/4;
+I(:,16)=(gene(:,13)+gene(:,14)+gene(:,15)+gene(:,16))/4;
+I(:,17)=(gene(:,14)+gene(:,15)+gene(:,16)+gene(:,17))/4;
+B0=zeros(237,17);
+for t=1:n                          % to calculate the f(t)
+  for j=1:m
+      f(j,t)=1/(1+1/(exp(0.5*gene(j,t))))
+  end
+end
+D=B0*f;
+%X(:,t)=(gene(:,t)-C(:,t)-D(:,t)-I(:,t))
+options = struct('GradObj','on','Display','iter','LargeScale','off','HessUpdate','bfgs','InitialHessType','identity','GoalsExactAchieve',0);
+[x,fval,exitflag,output,grad]=fminlbfgs(@obj_D,B0,optim)
+
